@@ -6,7 +6,7 @@ Tags: Typography, Font Size, Font Family
 Requires at least: 6.7  
 Tested up to: 7.0  
 Requires PHP: 8.1  
-Stable tag: 0.4.8  
+Stable tag: 0.5.1  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -35,7 +35,7 @@ The Font Size toolbar button icon is based on the "format_size" icon from [Mater
 
 ## Changelog
 
-### Unreleased
+### 0.5.1
 
 * Add a Font Family control, letting you apply an inline font family from your theme's `theme.json` presets.
 * Show the Font Size control as a direct toolbar button instead of inside the "More" dropdown.
