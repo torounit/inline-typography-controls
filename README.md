@@ -1,13 +1,13 @@
 # Inline Typography Controls
 
-Contributors:      Toro_Unit,hamworks 
-Donate link:       https://www.paypal.me/torounit
-Tags:              Typography, Font Size, Font Family
-Requires at least: 6.7 
-Tested up to:      7.0 
-Requires PHP:      8.1 
-Stable tag:        0.4.8
-License:           GPLv3 or later 
+Contributors:      Toro_Unit,hamworks  
+Donate link:       https://www.paypal.me/torounit  
+Tags:              Typography, Font Size, Font Family  
+Requires at least: 6.7  
+Tested up to:      7.0  
+Requires PHP:      8.1  
+Stable tag:        0.4.8  
+License:           GPLv3 or later  
 License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 
 Add inline typography controls to the block editor toolbar, letting you apply formatting to selected text without wrapping it in a block.
