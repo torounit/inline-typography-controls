@@ -35,6 +35,13 @@ The Font Size toolbar button icon is based on the "format_size" icon from [Mater
 
 ## Changelog
 
+### Unreleased
+
+* Add a Font Family control, letting you apply an inline font family from your theme's `theme.json` presets.
+* Show the Font Size control as a direct toolbar button instead of inside the "More" dropdown.
+* Use a Material Symbols "format_size" icon for the Font Size button.
+* Relicense the plugin from GPLv2 or later to GPLv3 or later.
+
 ### 0.4.8
 
 * Tested up to WordPress 7.0
