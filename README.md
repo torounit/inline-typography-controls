@@ -30,6 +30,6 @@ Github: https://github.com/torounit/inline-typography-controls
 
 ## Changelog
 
-* 0.4.7
+### 0.4.8
 
- * Tested up to WordPress 7.0
+* Tested up to WordPress 7.0
