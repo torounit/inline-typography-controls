@@ -6,7 +6,7 @@ import {
 	getActiveFormat,
 } from '@wordpress/rich-text';
 import type { RichTextValue } from '@wordpress/rich-text';
-import { typography } from '@wordpress/icons';
+import { SVG, Path } from '@wordpress/primitives';
 import {
 	BlockControls,
 	// @ts-ignore
@@ -22,6 +22,13 @@ import {
 import { __ } from '@wordpress/i18n';
 
 import './editor.css';
+
+// Material Symbols Outlined: format_size
+const formatSizeIcon = (
+	<SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+		<Path d="M560-160v-520H360v-120h520v120H680v520H560Zm-360 0v-320H80v-120h360v120H320v320H200Z" />
+	</SVG>
+);
 
 export const formatName = 'inline-typography-controls/font-size';
 
@@ -52,7 +59,7 @@ function Edit( { isActive, onChange, value, contentRef } ) {
 			<BlockControls group="inline">
 				<ToolbarGroup>
 					<ToolbarButton
-						icon={ typography }
+						icon={ formatSizeIcon }
 						title={ settings.title }
 						onClick={ togglePopover }
 						isActive={ isActive }
