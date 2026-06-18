@@ -11,7 +11,7 @@ version=$1
 
 # Stable tag should only track stable releases, not prereleases.
 if ! echo "${version}" | grep -qE "alpha|beta|RC|rc"; then
-	sed -i.bak -e "s/^Stable tag:.*/Stable tag:        ${version}/" README.md
+	sed -i.bak -e "s/^Stable tag:.*/Stable tag: ${version}  /" README.md
 	rm README.md.bak
 fi
 
