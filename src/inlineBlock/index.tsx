@@ -12,6 +12,7 @@ export const settings = {
 	tagName: 'span',
 	className: 'has-inline-block',
 	interactive: false,
+	object: false,
 	name: formatName,
 	edit: Edit,
 };

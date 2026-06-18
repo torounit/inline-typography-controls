@@ -2,7 +2,7 @@
 
 Contributors:      Toro_Unit,hamworks 
 Donate link:       https://www.paypal.me/torounit
-Tags:              Typography, Font Size
+Tags:              Typography, Font Size, Font Family
 Requires at least: 6.7 
 Tested up to:      7.0 
 Requires PHP:      8.1 
@@ -21,6 +21,7 @@ Github: https://github.com/torounit/inline-typography-controls
 ### Controls
 
 * **Font Size** — Apply an inline font size to the selected text. Choose from the font size presets defined in your theme's `theme.json`, or pick a custom value with the slider.
+* **Font Family** — Apply an inline font family to the selected text, chosen from the font family presets defined in your theme's `theme.json`.
 * **Inline Block** — Wrap the selected text in an inline-block element (`display: inline-block`), which is useful for keeping a phrase from breaking across lines.
 * **Small** — Wrap the selected text in a `<small>` tag, useful for side comments and supplementary text such as captions or fine print.
 

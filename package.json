@@ -12,6 +12,7 @@
 		"lint-css:fix": "wp-scripts lint-style --fix",
 		"lint-js": "wp-scripts lint-js",
 		"lint-js:fix": "wp-scripts lint-js --fix",
+		"type-check": "tsc --noEmit",
 		"lint-php": "composer lint",
 		"lint-php:fix": "composer format",
 		"packages-update": "wp-scripts packages-update",
@@ -24,6 +25,9 @@
 		],
 		"*.{js,ts,tsx}": [
 			"npm run lint-js:fix"
+		],
+		"*.{ts,tsx}": [
+			"bash -c 'npm run type-check'"
 		],
 		"{*.css,*.scss}": [
 			"npm run lint-css:fix"
