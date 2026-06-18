@@ -26,7 +26,7 @@ import './editor.css';
 // Material Symbols Outlined: format_size
 const formatSizeIcon = (
 	<SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
-		<Path d="M560-160v-520H360v-120h520v120H680v520H560Zm-360 0v-320H80v-120h360v120H320v320H200Z" />
+		<Path d="M576.54-180v-515H378.08v-85H860v85H661.54v515h-85Zm-357.31 0v-316.92H100v-85h323.08v85H303.84V-180h-84.61Z"/>
 	</SVG>
 );
 
