@@ -6,16 +6,29 @@ import {
 	getActiveFormat,
 } from '@wordpress/rich-text';
 import type { RichTextValue } from '@wordpress/rich-text';
-import { typography } from '@wordpress/icons';
+import { SVG, Path } from '@wordpress/primitives';
 import {
-	RichTextToolbarButton,
+	BlockControls,
 	// @ts-ignore
 	useSettings,
 } from '@wordpress/block-editor';
-import { Popover, FontSizePicker, Button } from '@wordpress/components';
+import {
+	Popover,
+	FontSizePicker,
+	Button,
+	ToolbarGroup,
+	ToolbarButton,
+} from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 import './editor.css';
+
+// Material Symbols Outlined: format_size
+const formatSizeIcon = (
+	<SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+		<Path d="M576.54-180v-515H378.08v-85H860v85H661.54v515h-85Zm-357.31 0v-316.92H100v-85h323.08v85H303.84V-180h-84.61Z" />
+	</SVG>
+);
 
 export const formatName = 'inline-typography-controls/font-size';
 
@@ -43,13 +56,16 @@ function Edit( { isActive, onChange, value, contentRef } ) {
 	};
 	return (
 		<>
-			<RichTextToolbarButton
-				icon={ typography }
-				title={ settings.title }
-				onClick={ togglePopover }
-				isActive={ isActive }
-				role="menuitemcheckbox"
-			/>
+			<BlockControls group="inline">
+				<ToolbarGroup>
+					<ToolbarButton
+						icon={ formatSizeIcon }
+						title={ settings.title }
+						onClick={ togglePopover }
+						isActive={ isActive }
+					/>
+				</ToolbarGroup>
+			</BlockControls>
 			{ isPopoverVisible && (
 				<InlineFontSizeUI
 					isActive={ isActive }
