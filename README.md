@@ -7,8 +7,8 @@ Requires at least: 6.7
 Tested up to:      7.0 
 Requires PHP:      8.1 
 Stable tag:        0.4.8
-License:           GPLv2 or later 
-License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+License:           GPLv3 or later 
+License URI:       https://www.gnu.org/licenses/gpl-3.0.html
 
 Add inline typography controls to the block editor toolbar, letting you apply formatting to selected text without wrapping it in a block.
 
@@ -28,6 +28,10 @@ Github: https://github.com/torounit/inline-typography-controls
 ## Screenshots
 
 1. Applying an inline font size to selected text using the theme's font size presets.
+
+## Credits
+
+The Font Size toolbar button icon is based on the "format_size" icon from [Material Symbols](https://fonts.google.com/icons) by Google, licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
 ## Changelog
 
