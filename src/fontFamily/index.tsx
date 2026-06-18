@@ -12,28 +12,34 @@ import {
 	// @ts-ignore
 	useSettings,
 } from '@wordpress/block-editor';
-import { Popover, FontSizePicker, Button } from '@wordpress/components';
+import { Popover, SelectControl, Button } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 import './editor.css';
 
-export const formatName = 'inline-typography-controls/font-size';
+export const formatName = 'inline-typography-controls/font-family';
 
 export const settings = {
-	title: __( 'Font size' ),
+	title: __( 'Font family' ),
 	tagName: 'span',
-	className: 'has-inline-font-size',
+	className: 'has-inline-font-family',
 	interactive: false,
 	object: false,
 	name: formatName,
 	attributes: {
 		style: 'style',
-		inlineFontSize: 'data-inline-font-size',
+		inlineFontFamily: 'data-inline-font-family',
 	},
 	edit: Edit,
 } as const;
 
 type Attributes = { [ K in keyof typeof settings.attributes ]: string };
+
+type FontFamilyDefinition = {
+	name?: string;
+	slug: string;
+	fontFamily: string;
+};
 
 // @ts-ignore
 function Edit( { isActive, onChange, value, contentRef } ) {
@@ -51,7 +57,7 @@ function Edit( { isActive, onChange, value, contentRef } ) {
 				role="menuitemcheckbox"
 			/>
 			{ isPopoverVisible && (
-				<InlineFontSizeUI
+				<InlineFontFamilyUI
 					isActive={ isActive }
 					value={ value }
 					onChange={ onChange }
@@ -63,7 +69,7 @@ function Edit( { isActive, onChange, value, contentRef } ) {
 	);
 }
 
-type InlineFontSizeUIProps = {
+type InlineFontFamilyUIProps = {
 	value: RichTextValue;
 	contentRef: RefObject< HTMLElement >;
 	onChange: ( value: RichTextValue ) => void;
@@ -71,41 +77,36 @@ type InlineFontSizeUIProps = {
 	isActive: boolean;
 };
 
-function InlineFontSizeUI( {
+function InlineFontFamilyUI( {
 	value,
 	contentRef,
 	onChange,
 	onClose,
 	isActive,
-}: InlineFontSizeUIProps ) {
-	const [
-		defaultFontSizesEnabled,
-		customFontSizes,
-		defaultFontSizes,
-		themeFontSizes,
-		customFontSize,
-	] = useSettings(
-		'typography.defaultFontSizes',
-		'typography.fontSizes.custom',
-		'typography.fontSizes.default',
-		'typography.fontSizes.theme',
-		'typography.customFontSize'
-	);
+}: InlineFontFamilyUIProps ) {
+	const [ customFontFamilies, themeFontFamilies, defaultFontFamilies ] =
+		useSettings(
+			'typography.fontFamilies.custom',
+			'typography.fontFamilies.theme',
+			'typography.fontFamilies.default'
+		);
 
-	function getMergedFontSizes() {
+	function getMergedFontFamilies(): FontFamilyDefinition[] {
 		return [
-			...( customFontSizes ?? [] ),
-			...( themeFontSizes ?? [] ),
-			...( defaultFontSizesEnabled ? defaultFontSizes ?? [] : [] ),
+			...( customFontFamilies ?? [] ),
+			...( themeFontFamilies ?? [] ),
+			...( defaultFontFamilies ?? [] ),
 		];
 	}
 
-	const activeInlineFontSizeFormat = getActiveFormat( value, formatName );
+	const fontFamilies = getMergedFontFamilies();
+
+	const activeInlineFontFamilyFormat = getActiveFormat( value, formatName );
 	// @ts-ignore
-	const attributes = activeInlineFontSizeFormat?.attributes as
+	const attributes = activeInlineFontFamilyFormat?.attributes as
 		| Partial< Attributes >
 		| undefined;
-	const activeFontSize = attributes?.inlineFontSize ?? '';
+	const activeFontFamily = attributes?.inlineFontFamily ?? '';
 
 	const popoverAnchor = useAnchor( {
 		editableContentElement: contentRef.current,
@@ -113,8 +114,11 @@ function InlineFontSizeUI( {
 		settings: { ...settings, isActive },
 	} );
 
-	const onChangeFontSize = ( fontSize: string | number | undefined ) => {
-		if ( ! fontSize ) {
+	const onChangeFontFamily = ( slug: string ) => {
+		const fontFamilyDefinition = fontFamilies.find(
+			( fontFamily ) => fontFamily.slug === slug
+		);
+		if ( ! fontFamilyDefinition ) {
 			onChange( removeFormat( value, formatName ) );
 		} else {
 			// @ts-ignore
@@ -123,8 +127,8 @@ function InlineFontSizeUI( {
 					type: formatName,
 					// @ts-ignore
 					attributes: {
-						inlineFontSize: `${ fontSize }`,
-						style: `font-size: ${ fontSize };`,
+						inlineFontFamily: fontFamilyDefinition.slug,
+						style: `font-family: ${ fontFamilyDefinition.fontFamily };`,
 					},
 				} )
 			);
@@ -135,16 +139,21 @@ function InlineFontSizeUI( {
 		<Popover
 			anchor={ popoverAnchor }
 			onClose={ onClose }
-			className="inline-typography-controls-font-size-popover"
+			className="inline-typography-controls-font-family-popover"
 		>
-			<FontSizePicker
+			<SelectControl
 				__next40pxDefaultSize
-				fontSizes={ getMergedFontSizes() }
-				disableCustomFontSizes={ ! customFontSize }
-				onChange={ onChangeFontSize }
-				value={ activeFontSize }
-				withSlider
-				withReset={ false }
+				__nextHasNoMarginBottom
+				label={ settings.title }
+				value={ activeFontFamily }
+				options={ [
+					{ label: __( 'Default' ), value: '' },
+					...fontFamilies.map( ( fontFamily ) => ( {
+						label: fontFamily.name ?? fontFamily.slug,
+						value: fontFamily.slug,
+					} ) ),
+				] }
+				onChange={ onChangeFontFamily }
 			/>
 			<div style={ { marginTop: '16px', display: 'flex' } }>
 				<Button

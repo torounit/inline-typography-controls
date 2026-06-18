@@ -10,6 +10,7 @@ export const settings = {
 	tagName: 'small',
 	className: null,
 	interactive: false,
+	object: false,
 	name: formatName,
 	edit: Edit,
 };
