@@ -56,19 +56,10 @@
 	},
 	"release-it": {
 		"hooks": {
-			"before:bump": [
-				"composer install --optimize-autoloader --prefer-dist --no-dev",
-				"bash ./bin/create-release.sh inline-typography-controls ${version}",
-				"bash ./bin/create-zip.sh inline-typography-controls"
-			],
-			"after:bump": "composer install --optimize-autoloader --prefer-dist",
-			"after:release": "bash ./bin/cleanup.sh inline-typography-controls"
+			"before:bump": "bash ./bin/bump-version.sh ${version}"
 		},
 		"github": {
-			"release": true,
-			"assets": [
-				"*.zip"
-			]
+			"release": true
 		},
 		"npm": {
 			"publish": false
