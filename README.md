@@ -16,7 +16,7 @@ Add inline typography controls to the editor.
 
 Add inline typography controls to the editor.
 
-Github: https://github.com/hamworks/inline-typography-controls
+Github: https://github.com/torounit/inline-typography-controls
 
 ### Controls
 

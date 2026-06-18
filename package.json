@@ -1,8 +1,8 @@
 {
-	"name": "@hamworks/inline-typography-controls",
+	"name": "@torounit/inline-typography-controls",
 	"version": "0.4.6",
 	"license": "GPL-2.0-or-later",
-	"author": "HAMWORKS Co., Ltd.",
+	"author": "Toro_Unit",
 	"scripts": {
 		"wp-env": "wp-env",
 		"dev": "wp-scripts start",
