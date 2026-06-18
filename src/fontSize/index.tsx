@@ -49,7 +49,7 @@ function Edit( { isActive, onChange, value, contentRef } ) {
 	};
 	return (
 		<>
-			<BlockControls group="other">
+			<BlockControls group="inline">
 				<ToolbarGroup>
 					<ToolbarButton
 						icon={ typography }
