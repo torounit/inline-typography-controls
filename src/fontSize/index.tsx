@@ -8,11 +8,17 @@ import {
 import type { RichTextValue } from '@wordpress/rich-text';
 import { typography } from '@wordpress/icons';
 import {
-	RichTextToolbarButton,
+	BlockControls,
 	// @ts-ignore
 	useSettings,
 } from '@wordpress/block-editor';
-import { Popover, FontSizePicker, Button } from '@wordpress/components';
+import {
+	Popover,
+	FontSizePicker,
+	Button,
+	ToolbarGroup,
+	ToolbarButton,
+} from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 
 import './editor.css';
@@ -43,13 +49,16 @@ function Edit( { isActive, onChange, value, contentRef } ) {
 	};
 	return (
 		<>
-			<RichTextToolbarButton
-				icon={ typography }
-				title={ settings.title }
-				onClick={ togglePopover }
-				isActive={ isActive }
-				role="menuitemcheckbox"
-			/>
+			<BlockControls group="inline">
+				<ToolbarGroup>
+					<ToolbarButton
+						icon={ typography }
+						title={ settings.title }
+						onClick={ togglePopover }
+						isActive={ isActive }
+					/>
+				</ToolbarGroup>
+			</BlockControls>
 			{ isPopoverVisible && (
 				<InlineFontSizeUI
 					isActive={ isActive }
