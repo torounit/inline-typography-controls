@@ -15,5 +15,9 @@ if ! echo "${version}" | grep -qE "alpha|beta|RC|rc"; then
 	rm README.md.bak
 fi
 
+# Turn the pending "Unreleased" changelog entry into the released version heading.
+sed -i.bak -e "s/^### Unreleased$/### ${version}/" README.md
+rm README.md.bak
+
 sed -i.bak -e "s/^ \* Version: .*/ * Version: ${version}/" inline-typography-controls.php
 rm inline-typography-controls.php.bak
