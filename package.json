@@ -57,18 +57,12 @@
 	"release-it": {
 		"hooks": {
 			"before:bump": [
-				"composer install --optimize-autoloader --prefer-dist --no-dev",
-				"bash ./bin/create-release.sh inline-typography-controls ${version}",
-				"bash ./bin/create-zip.sh inline-typography-controls"
-			],
-			"after:bump": "composer install --optimize-autoloader --prefer-dist",
-			"after:release": "bash ./bin/cleanup.sh inline-typography-controls"
+				"sed -i.bak -e \"s/^ \\* Version: .*/ * Version: ${version}/\" inline-typography-controls.php && rm inline-typography-controls.php.bak",
+				"if ! echo \"${version}\" | grep -qE \"alpha|beta|RC|rc\"; then sed -i.bak -e \"s/^Stable tag:.*/Stable tag:        ${version}/\" README.md; rm README.md.bak; fi"
+			]
 		},
 		"github": {
-			"release": true,
-			"assets": [
-				"*.zip"
-			]
+			"release": true
 		},
 		"npm": {
 			"publish": false

@@ -10,7 +10,6 @@
 .phpdoc
 Thumbs.db
 behat.yml
-bin
 .cache
 wp-cli.local.yml
 docker
@@ -29,7 +28,6 @@ package.json
 package-lock.json
 phpdoc.dist.xml
 phpunit.xml.dist
-README.md
 tests
 .eslintignore
 .eslintrc
