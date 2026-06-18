@@ -3,9 +3,9 @@
  * Plugin Name: Inline Typography Controls
  * Description: Add inline typography controls to the editor.
  * Version: 0.4.6
- * Author: HAMWORKS
+ * Author: Toro_Unit
  * License: GPL-2.0+
- * GitHub Plugin URI: https://github.com/hamworks/inline-typography-controls
+ * GitHub Plugin URI: https://github.com/torounit/inline-typography-controls
  * Release Asset: true
  *
  * @package inline-typography-controls
