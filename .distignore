@@ -5,6 +5,9 @@
 .npmrc
 .git
 .idea
+.claude
+.vscode
+.wordpress-org
 .travis.yml
 .DS_Store
 .phpdoc
@@ -15,6 +18,7 @@ bin
 wp-cli.local.yml
 docker
 node_modules
+src
 *.sql
 wordpress
 *.tar.gz
@@ -24,12 +28,14 @@ nightly
 .wp-env.json
 .editorconfig
 .phpcs.xml.dist
+composer.json
 composer.lock
 package.json
 package-lock.json
 phpdoc.dist.xml
 phpunit.xml.dist
 tests
+tsconfig.json
 .eslintignore
 .eslintrc
 .husky
