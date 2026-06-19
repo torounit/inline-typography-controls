@@ -16,7 +16,7 @@ Add inline typography controls to the block editor toolbar, letting you apply fo
 
 This plugin adds extra controls to the rich text formatting toolbar (the popup toolbar shown when you select text inside a block). Each control wraps the selected text in an inline element, similar to Bold or Italic, so you can mix formatting within a single paragraph or heading.
 
-Github: https://github.com/torounit/inline-typography-controls
+Github: [https://github.com/torounit/inline-typography-controls](https://github.com/torounit/inline-typography-controls)
 
 ### Controls
 
