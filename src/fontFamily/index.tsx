@@ -104,8 +104,7 @@ function InlineFontFamilyUI( {
 	const activeInlineFontFamilyFormat = getActiveFormat( value, formatName );
 	// @ts-ignore
 	const attributes = activeInlineFontFamilyFormat?.attributes as
-		| Partial< Attributes >
-		| undefined;
+		Partial< Attributes > | undefined;
 	const activeFontFamily = attributes?.inlineFontFamily ?? '';
 
 	const popoverAnchor = useAnchor( {

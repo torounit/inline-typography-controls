@@ -37,21 +37,22 @@
 		]
 	},
 	"dependencies": {
-		"@wordpress/block-editor": "^15.21.1",
-		"@wordpress/components": "^35.0.1",
-		"@wordpress/i18n": "^6.21.1",
-		"@wordpress/icons": "^14.0.1",
-		"@wordpress/primitives": "^4.48.1",
-		"@wordpress/rich-text": "^7.48.1"
+		"@wordpress/block-editor": "^19.0.0",
+		"@wordpress/components": "^43.0.0",
+		"@wordpress/i18n": "^7.0.0",
+		"@wordpress/icons": "^19.0.0",
+		"@wordpress/primitives": "^5.0.0",
+		"@wordpress/rich-text": "^8.0.0"
 	},
 	"devDependencies": {
-		"@types/wordpress__block-editor": "^11.5.16",
-		"@wordpress/env": "^11.8.1",
-		"@wordpress/prettier-config": "^4.48.1",
-		"@wordpress/scripts": "^32.4.1",
-		"husky": "^9.1.6",
-		"lint-staged": "^15.2.10",
-		"npm-run-all": "^4.1.5"
+		"@types/wordpress__block-editor": "^15.0.8",
+		"@wordpress/env": "^12.0.0",
+		"@wordpress/prettier-config": "^5.0.0",
+		"@wordpress/scripts": "^37.0.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^17.6.0",
+		"npm-run-all": "^4.1.5",
+		"prettier": "npm:wp-prettier@^3.9.6"
 	},
 	"peerDependencies": {
 		"react": "^18.0.0",
