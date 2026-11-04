@@ -112,15 +112,14 @@ function InlineFontSizeUI( {
 		return [
 			...( customFontSizes ?? [] ),
 			...( themeFontSizes ?? [] ),
-			...( defaultFontSizesEnabled ? defaultFontSizes ?? [] : [] ),
+			...( defaultFontSizesEnabled ? ( defaultFontSizes ?? [] ) : [] ),
 		];
 	}
 
 	const activeInlineFontSizeFormat = getActiveFormat( value, formatName );
 	// @ts-ignore
 	const attributes = activeInlineFontSizeFormat?.attributes as
-		| Partial< Attributes >
-		| undefined;
+		Partial< Attributes > | undefined;
 	const activeFontSize = attributes?.inlineFontSize ?? '';
 
 	const popoverAnchor = useAnchor( {

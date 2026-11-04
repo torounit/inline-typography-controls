@@ -3,9 +3,9 @@
 Contributors: Toro_Unit,hamworks  
 Donate link: https://www.paypal.me/torounit  
 Tags: Typography, Font Size, Font Family  
-Requires at least: 6.7  
-Tested up to: 7.0  
-Requires PHP: 8.1  
+Requires at least: 6.8  
+Tested up to: 7.1  
+Requires PHP: 8.2  
 Stable tag: 0.5.2  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -34,6 +34,13 @@ Github: [https://github.com/torounit/inline-typography-controls](https://github.
 The Font Size toolbar button icon is based on the "format_size" icon from [Material Symbols](https://fonts.google.com/icons) by Google, licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
 ## Changelog
+
+### Unreleased
+
+* Update dependencies.
+* Requires WordPress 6.8 or later.
+* Requires PHP 8.2 or later.
+* Tested up to WordPress 7.1.
 
 ### 0.5.1
 
