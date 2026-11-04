@@ -25,6 +25,7 @@ wordpress
 *.zip
 nightly
 .nvmrc
+.node-version
 .wp-env.json
 .editorconfig
 .phpcs.xml.dist
