@@ -3,6 +3,8 @@
  * Plugin Name: Inline Typography Controls
  * Description: Add inline typography controls to the editor.
  * Version: 0.5.2
+ * Requires at least: 6.8
+ * Requires PHP: 8.2
  * Author: Toro_Unit
  * License: GPL-3.0+
  * GitHub Plugin URI: https://github.com/torounit/inline-typography-controls

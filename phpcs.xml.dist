@@ -16,8 +16,8 @@
 	<arg name="colors"/>
 
 	<!-- Rules: Check PHP version compatibility -->
-	<config name="testVersion" value="8.0-"/>
-	<config name="minimum_supported_wp_version" value="6.6"/>
+	<config name="testVersion" value="8.2-"/>
+	<config name="minimum_supported_wp_version" value="6.8"/>
 
 	<rule ref="WordPress">
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName" />

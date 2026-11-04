@@ -3,9 +3,9 @@
 Contributors: Toro_Unit,hamworks  
 Donate link: https://www.paypal.me/torounit  
 Tags: Typography, Font Size, Font Family  
-Requires at least: 6.7  
+Requires at least: 6.8  
 Tested up to: 7.1  
-Requires PHP: 8.1  
+Requires PHP: 8.2  
 Stable tag: 0.5.2  
 License: GPLv3 or later  
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -37,6 +37,8 @@ The Font Size toolbar button icon is based on the "format_size" icon from [Mater
 
 ### Unreleased
 
+* Requires WordPress 6.8 or later.
+* Requires PHP 8.2 or later.
 * Tested up to WordPress 7.1.
 
 ### 0.5.1
