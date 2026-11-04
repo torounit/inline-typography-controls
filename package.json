@@ -16,8 +16,7 @@
 		"lint-php": "composer lint",
 		"lint-php:fix": "composer format",
 		"packages-update": "wp-scripts packages-update",
-		"prepare": "husky",
-		"release": "release-it"
+		"prepare": "husky"
 	},
 	"lint-staged": {
 		"*.{js,json,ts,tsx}": [
@@ -52,22 +51,10 @@
 		"@wordpress/scripts": "^32.4.1",
 		"husky": "^9.1.6",
 		"lint-staged": "^15.2.10",
-		"npm-run-all": "^4.1.5",
-		"release-it": "^20.2.0"
+		"npm-run-all": "^4.1.5"
 	},
 	"peerDependencies": {
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0"
-	},
-	"release-it": {
-		"hooks": {
-			"before:bump": "bash ./bin/bump-version.sh ${version}"
-		},
-		"github": {
-			"release": true
-		},
-		"npm": {
-			"publish": false
-		}
 	}
 }
