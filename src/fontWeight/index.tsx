@@ -50,22 +50,8 @@ type Attributes = { [ K in keyof typeof settings.attributes ]: string };
 
 type FontFamilyDefinition = {
 	slug: string;
-	fontFamily: string;
 	fontFace?: unknown[];
 };
-
-// Makes a `font-family` value comparable: computed styles and theme.json differ in quoting and spacing.
-function normalizeFontFamily( fontFamily: string ) {
-	return fontFamily
-		.split( ',' )
-		.map( ( name ) =>
-			name
-				.trim()
-				.replace( /^["']|["']$/g, '' )
-				.toLowerCase()
-		)
-		.join( ',' );
-}
 
 // @ts-ignore
 function Edit( { isActive, onChange, value, contentRef } ) {
@@ -128,26 +114,14 @@ function InlineFontWeightUI( {
 		Partial< Attributes > | undefined;
 	const activeFontWeight = attributes?.inlineFontWeight;
 
-	// The font family in effect for the selection: the inline Font Family format if there is
-	// one, otherwise whatever the block renders with (its own setting or an inherited one).
-	// Its font faces limit the weights on offer, as they do for the block setting.
+	// With the inline Font Family format on the selection, that font's faces limit the weights
+	// on offer, as they do for the block setting. Otherwise core lists every weight.
 	const inlineFontFamilySlug = // @ts-ignore
 		getActiveFormat( value, fontFamilyFormatName )?.attributes
 			?.inlineFontFamily;
-	const contentElement = contentRef.current;
-	const renderedFontFamily = contentElement
-		? normalizeFontFamily(
-				contentElement.ownerDocument.defaultView?.getComputedStyle(
-					contentElement
-				).fontFamily ?? ''
-			)
-		: '';
-	const activeFontFamily = inlineFontFamilySlug
-		? fontFamilies.find( ( { slug } ) => slug === inlineFontFamilySlug )
-		: fontFamilies.find(
-				( { fontFamily } ) =>
-					normalizeFontFamily( fontFamily ) === renderedFontFamily
-			);
+	const inlineFontFamily = fontFamilies.find(
+		( { slug } ) => slug === inlineFontFamilySlug
+	);
 
 	const popoverAnchor = useAnchor( {
 		editableContentElement: contentRef.current,
@@ -182,7 +156,7 @@ function InlineFontWeightUI( {
 			<FontAppearanceControl
 				__next40pxDefaultSize
 				hasFontStyles={ false }
-				fontFamilyFaces={ activeFontFamily?.fontFace }
+				fontFamilyFaces={ inlineFontFamily?.fontFace }
 				value={ { fontStyle: undefined, fontWeight: activeFontWeight } }
 				onChange={ onChangeFontWeight }
 			/>
