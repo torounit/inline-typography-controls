@@ -1,0 +1,31 @@
+name: PR Preview - Publish
+on:
+  # GitHub reads this workflow from the default branch, and it never checks out the
+  # pull request's code: it only publishes the ZIP that "PR Preview - Build" made.
+  workflow_run:
+    workflows: ['PR Preview - Build']
+    types: [completed]
+
+jobs:
+  # Uploads the ZIP to the "ci-artifacts" prerelease and adds a "Preview in WordPress
+  # Playground" button to the pull request description.
+  publish:
+    name: Publish Preview
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: WordPress/action-wp-playground-pr-preview/.github/workflows/preview-publish.yml@v4
+    with:
+      blueprint: |
+        {
+          "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+          "landingPage": "/wp-admin/post-new.php",
+          "steps": [
+            { "step": "login", "username": "admin" },
+            {
+              "step": "installPlugin",
+              "pluginData": { "resource": "url", "url": "{{ARTIFACT_URL:inline-typography-controls}}" },
+              "options": { "activate": true }
+            }
+          ]
+        }
