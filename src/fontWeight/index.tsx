@@ -11,12 +11,15 @@ import {
 	RichTextToolbarButton,
 	// @ts-ignore
 	useSettings,
+	useBlockEditContext,
+	store as blockEditorStore,
 	// The control core uses for the block "Appearance" setting; it has no stable export yet.
 	// @ts-ignore
 	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
 	__experimentalFontAppearanceControl as FontAppearanceControl,
 } from '@wordpress/block-editor';
 import { Popover, Button } from '@wordpress/components';
+import { useSelect } from '@wordpress/data';
 import { __ } from '@wordpress/i18n';
 
 import { formatName as fontFamilyFormatName } from '../fontFamily';
@@ -114,13 +117,23 @@ function InlineFontWeightUI( {
 		Partial< Attributes > | undefined;
 	const activeFontWeight = attributes?.inlineFontWeight;
 
-	// With the inline Font Family format on the selection, that font's faces limit the weights
-	// on offer, as they do for the block setting. Otherwise core lists every weight.
+	// The font family set on the selection, by the inline Font Family format or else on the
+	// block itself. Its font faces limit the weights on offer, as they do for the block
+	// setting. Without either, core lists every weight.
 	const inlineFontFamilySlug = // @ts-ignore
 		getActiveFormat( value, fontFamilyFormatName )?.attributes
 			?.inlineFontFamily;
-	const inlineFontFamily = fontFamilies.find(
-		( { slug } ) => slug === inlineFontFamilySlug
+	const { clientId } = useBlockEditContext();
+	const blockFontFamilySlug = useSelect(
+		( select ) =>
+			// @ts-ignore
+			select( blockEditorStore ).getBlockAttributes( clientId )
+				?.fontFamily,
+		[ clientId ]
+	);
+	const fontFamilySlug = inlineFontFamilySlug ?? blockFontFamilySlug;
+	const fontFamily = fontFamilies.find(
+		( { slug } ) => slug === fontFamilySlug
 	);
 
 	const popoverAnchor = useAnchor( {
@@ -156,7 +169,7 @@ function InlineFontWeightUI( {
 			<FontAppearanceControl
 				__next40pxDefaultSize
 				hasFontStyles={ false }
-				fontFamilyFaces={ inlineFontFamily?.fontFace }
+				fontFamilyFaces={ fontFamily?.fontFace }
 				value={ { fontStyle: undefined, fontWeight: activeFontWeight } }
 				onChange={ onChangeFontWeight }
 			/>

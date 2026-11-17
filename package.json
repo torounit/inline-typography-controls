@@ -39,6 +39,7 @@
 	"dependencies": {
 		"@wordpress/block-editor": "^19.0.0",
 		"@wordpress/components": "^43.0.0",
+		"@wordpress/data": "^11.0.0",
 		"@wordpress/i18n": "^7.0.0",
 		"@wordpress/icons": "^19.0.0",
 		"@wordpress/primitives": "^5.0.0",
