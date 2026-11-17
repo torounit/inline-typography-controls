@@ -22,6 +22,7 @@ Github: [https://github.com/torounit/inline-typography-controls](https://github.
 
 * **Font Size** — Apply an inline font size to the selected text. Choose from the font size presets defined in your theme's `theme.json`, or pick a custom value with the slider.
 * **Font Family** — Apply an inline font family to the selected text, chosen from the font family presets defined in your theme's `theme.json`.
+* **Font Weight** — Apply an inline font weight to the selected text. Unlike Bold, it does not add a `<strong>` tag.
 * **Inline Block** — Wrap the selected text in an inline-block element (`display: inline-block`), which is useful for keeping a phrase from breaking across lines.
 * **Side comment** — Wrap the selected text in a `<small>` tag, useful for side comments and supplementary text such as captions or fine print.
 
@@ -33,10 +34,13 @@ Github: [https://github.com/torounit/inline-typography-controls](https://github.
 
 The Font Size toolbar button icon is based on the "format_size" icon from [Material Symbols](https://fonts.google.com/icons) by Google, licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
+The Font Weight toolbar button icon is the "line_weight" icon from [Material Symbols](https://fonts.google.com/icons) by Google, licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
 ## Changelog
 
 ### Unreleased
 
+* Add a Font Weight control, letting you apply an inline font weight.
 * Update dependencies.
 * Requires WordPress 6.8 or later.
 * Requires PHP 8.2 or later.
