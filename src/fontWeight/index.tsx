@@ -7,9 +7,19 @@ import {
 } from '@wordpress/rich-text';
 import type { RichTextValue } from '@wordpress/rich-text';
 import { SVG, Path } from '@wordpress/primitives';
-import { RichTextToolbarButton } from '@wordpress/block-editor';
-import { Popover, SelectControl, Button } from '@wordpress/components';
-import { __, _x } from '@wordpress/i18n';
+import {
+	RichTextToolbarButton,
+	// @ts-ignore
+	useSettings,
+	// The control core uses for the block "Appearance" setting; it has no stable export yet.
+	// @ts-ignore
+	// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
+	__experimentalFontAppearanceControl as FontAppearanceControl,
+} from '@wordpress/block-editor';
+import { Popover, Button } from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+
+import { formatName as fontFamilyFormatName } from '../fontFamily';
 
 import './editor.css';
 
@@ -38,17 +48,24 @@ export const settings = {
 
 type Attributes = { [ K in keyof typeof settings.attributes ]: string };
 
-const FONT_WEIGHTS = [
-	{ name: _x( 'Thin', 'font weight' ), value: '100' },
-	{ name: _x( 'Extra Light', 'font weight' ), value: '200' },
-	{ name: _x( 'Light', 'font weight' ), value: '300' },
-	{ name: _x( 'Regular', 'font weight' ), value: '400' },
-	{ name: _x( 'Medium', 'font weight' ), value: '500' },
-	{ name: _x( 'Semi Bold', 'font weight' ), value: '600' },
-	{ name: _x( 'Bold', 'font weight' ), value: '700' },
-	{ name: _x( 'Extra Bold', 'font weight' ), value: '800' },
-	{ name: _x( 'Black', 'font weight' ), value: '900' },
-];
+type FontFamilyDefinition = {
+	slug: string;
+	fontFamily: string;
+	fontFace?: unknown[];
+};
+
+// Makes a `font-family` value comparable: computed styles and theme.json differ in quoting and spacing.
+function normalizeFontFamily( fontFamily: string ) {
+	return fontFamily
+		.split( ',' )
+		.map( ( name ) =>
+			name
+				.trim()
+				.replace( /^["']|["']$/g, '' )
+				.toLowerCase()
+		)
+		.join( ',' );
+}
 
 // @ts-ignore
 function Edit( { isActive, onChange, value, contentRef } ) {
@@ -93,11 +110,44 @@ function InlineFontWeightUI( {
 	onClose,
 	isActive,
 }: InlineFontWeightUIProps ) {
+	const [ customFontFamilies, themeFontFamilies, defaultFontFamilies ] =
+		useSettings(
+			'typography.fontFamilies.custom',
+			'typography.fontFamilies.theme',
+			'typography.fontFamilies.default'
+		);
+	const fontFamilies: FontFamilyDefinition[] = [
+		...( customFontFamilies ?? [] ),
+		...( themeFontFamilies ?? [] ),
+		...( defaultFontFamilies ?? [] ),
+	];
+
 	const activeInlineFontWeightFormat = getActiveFormat( value, formatName );
 	// @ts-ignore
 	const attributes = activeInlineFontWeightFormat?.attributes as
 		Partial< Attributes > | undefined;
-	const activeFontWeight = attributes?.inlineFontWeight ?? '';
+	const activeFontWeight = attributes?.inlineFontWeight;
+
+	// The font family in effect for the selection: the inline Font Family format if there is
+	// one, otherwise whatever the block renders with (its own setting or an inherited one).
+	// Its font faces limit the weights on offer, as they do for the block setting.
+	const inlineFontFamilySlug = // @ts-ignore
+		getActiveFormat( value, fontFamilyFormatName )?.attributes
+			?.inlineFontFamily;
+	const contentElement = contentRef.current;
+	const renderedFontFamily = contentElement
+		? normalizeFontFamily(
+				contentElement.ownerDocument.defaultView?.getComputedStyle(
+					contentElement
+				).fontFamily ?? ''
+			)
+		: '';
+	const activeFontFamily = inlineFontFamilySlug
+		? fontFamilies.find( ( { slug } ) => slug === inlineFontFamilySlug )
+		: fontFamilies.find(
+				( { fontFamily } ) =>
+					normalizeFontFamily( fontFamily ) === renderedFontFamily
+			);
 
 	const popoverAnchor = useAnchor( {
 		editableContentElement: contentRef.current,
@@ -105,7 +155,7 @@ function InlineFontWeightUI( {
 		settings: { ...settings, isActive },
 	} );
 
-	const onChangeFontWeight = ( fontWeight: string ) => {
+	const onChangeFontWeight = ( { fontWeight }: { fontWeight?: string } ) => {
 		if ( ! fontWeight ) {
 			onChange( removeFormat( value, formatName ) );
 		} else {
@@ -129,18 +179,11 @@ function InlineFontWeightUI( {
 			onClose={ onClose }
 			className="inline-typography-controls-font-weight-popover"
 		>
-			<SelectControl
+			<FontAppearanceControl
 				__next40pxDefaultSize
-				__nextHasNoMarginBottom
-				label={ settings.title }
-				value={ activeFontWeight }
-				options={ [
-					{ label: __( 'Default' ), value: '' },
-					...FONT_WEIGHTS.map( ( fontWeight ) => ( {
-						label: `${ fontWeight.name } (${ fontWeight.value })`,
-						value: fontWeight.value,
-					} ) ),
-				] }
+				hasFontStyles={ false }
+				fontFamilyFaces={ activeFontFamily?.fontFace }
+				value={ { fontStyle: undefined, fontWeight: activeFontWeight } }
 				onChange={ onChangeFontWeight }
 			/>
 			<div style={ { marginTop: '16px', display: 'flex' } }>
